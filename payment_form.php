@@ -1,3 +1,4 @@
+<?php include 'security.php' ?>
 <html>
 <head>
     <title>Secure Acceptance - Payment Form Example</title>
@@ -5,7 +6,7 @@
     <script type="text/javascript" src="jquery-1.7.min.js"></script>
 </head>
 <body>
-<form id="payment_form" action="payment_confirmation.php" method="post">
+<form id="payment_form" action="https://testsecureacceptance.cybersource.com/pay" method="post">
     <input type="hidden" name="access_key" value="7ab6e48404b33cc5811ccbf6657202cd">
     <input type="hidden" name="profile_id" value="833BB70A-BC54-4503-A008-90DED344993D">
     <input type="hidden" name="transaction_uuid" value="<?php echo uniqid() ?>">
@@ -25,8 +26,22 @@
     <input type="hidden" name="bill_to_surname" value="Cordero">
     <input type="hidden" name="req_tax_amount" value="0.50">
 
+    <?php
+        foreach($_REQUEST as $name => $value) {
+            $params[$name] = $value;
+            echo "<input type=\"hidden\" id=\"" . $name . "\" name=\"" . $name . "\" value=\"" . $value . "\"/>\n";
+        }
+        echo "<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" . sign($params) . "\"/>\n";
+    ?>
+
     <input type="submit" id="submit" name="submit" value="Submit"/>
     <script type="text/javascript" src="payment_form.js"></script>
 </form>
+<!-- Automatically presses the sumbit button !-->
+<script type="text/javascript">
+    window.onload = function() {
+        document.getElementById('payment_form').submit();
+    }
+</script>
 </body>
 </html>
