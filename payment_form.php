@@ -33,11 +33,10 @@
         }
         echo "<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" . sign($params) . "\"/>\n";
     ?>
-
-    <input type="submit" id="submit" name="submit" value="Submit"/>
-    <script type="text/javascript" src="payment_form.js"></script>
+<input type="submit" id="submit_button" name="submit" value="Submit"/>
+<script type="text/javascript" src="payment_form.js"></script>
 </form>
-<!-- Automatically presses the sumbit button !-->
+
 <script type="text/javascript">
     window.onload = function() {
         document.getElementById('payment_form').submit();
