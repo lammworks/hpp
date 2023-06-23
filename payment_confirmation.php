@@ -29,6 +29,7 @@
             echo "<input type=\"hidden\" id=\"" . $name . "\" name=\"" . $name . "\" value=\"" . $value . "\"/>\n";
         }
         echo "<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" . sign($params) . "\"/>\n";
+        echo buildDataToSign($params);
     ?>
 <input type="submit" id="submit" value="Confirm"/>
 </form>
